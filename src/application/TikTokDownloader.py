@@ -187,12 +187,12 @@ class TikTokDownloader:
         if not self.config["Disclaimer"]:
             await self.__init_language()
             self.console.print(_(DISCLAIMER_TEXT), style=MASTER)
-            if self.console.input(
-                _("是否已仔细阅读上述免责声明(YES/NO): ")
-            ).upper() not in ("Y", "YES"):
-                return False
+            # if self.console.input(
+            #     _("是否已仔细阅读上述免责声明(YES/NO): ")
+            # ).upper() not in ("Y", "YES"):
+            #     return False
             await self.database.update_config_data("Disclaimer", 1)
-            self.console.print()
+            # self.console.print()
         return True
 
     async def __init_language(self):
@@ -206,13 +206,13 @@ class TikTokDownloader:
                 "en_US",
             ),
         )
-        language = choose(
-            "请选择语言(Please Select Language)",
-            [i[0] for i in languages],
-            self.console,
-        )
+        # language = choose(
+        #     "请选择语言(Please Select Language)",
+        #     [i[0] for i in languages],
+        #     self.console,
+        # )
         try:
-            language = languages[int(language) - 1][1]
+            language = languages[int(1) - 1][1]
             await self._update_language(language)
         except ValueError:
             await self.__init_language()
@@ -222,9 +222,9 @@ class TikTokDownloader:
             f"{self.LINE}\n\n\n{self.NAME.center(self.WIDTH)}\n\n\n{self.LINE}\n",
             style=MASTER,
         )
-        self.console.print(_("项目地址: {}").format(REPOSITORY), style=MASTER)
-        self.console.print(_("项目文档: {}").format(DOCUMENTATION_URL), style=MASTER)
-        self.console.print(_("开源许可: {}\n").format(LICENCE), style=MASTER)
+        # self.console.print(_("项目地址: {}").format(REPOSITORY), style=MASTER)
+        # self.console.print(_("项目文档: {}").format(DOCUMENTATION_URL), style=MASTER)
+        # self.console.print(_("开源许可: {}\n").format(LICENCE), style=MASTER)
 
     def check_config(self):
         self.recorder = DownloadRecorder(
@@ -277,15 +277,16 @@ class TikTokDownloader:
         while self.running:
             self.__update_menu()
             if not mode:
-                mode = choose(
-                    _("DouK-Downloader 功能选项"),
-                    [i for i, __ in self.__function_menu],
-                    self.console,
-                    separate=(
-                        4,
-                        8,
-                    ),
-                )
+                mode = 7  # 默认选择Web API交互模式
+                # mode = choose(
+                #     _("DouK-Downloader 功能选项"),
+                #     [i for i, __ in self.__function_menu],
+                #     self.console,
+                #     separate=(
+                #         4,
+                #         8,
+                #     ),
+                # )
             await self.compatible(mode)
             mode = None
 
@@ -387,7 +388,7 @@ class TikTokDownloader:
         self.parameter.CLEANER.set_rule(TEXT_REPLACEMENT, True)
 
     async def run(self):
-        self.project_info()
+        # self.project_info()
         self.check_config()
         await self.check_settings(
             False,

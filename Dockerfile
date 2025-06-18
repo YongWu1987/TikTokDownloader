@@ -16,3 +16,4 @@ RUN pip install --no-cache-dir -r /TikTokDownloader/requirements.txt
 EXPOSE 5555
 
 CMD ["python", "main.py"]
+# docker run --name tiktok -p 5555:5555 -v D:\docker\tiktok\settings.json:/TikTokDownloader/settings.json -it tiktok
