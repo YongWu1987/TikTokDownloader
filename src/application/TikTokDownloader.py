@@ -1,4 +1,4 @@
-from asyncio import run
+from asyncio import CancelledError, run
 from threading import Event, Thread
 from time import sleep
 
@@ -23,19 +23,20 @@ from src.custom import (
     VERSION_MINOR,
 )
 from src.manager import Database, DownloadRecorder
-from src.module import Cookie, Register
+from src.module import Cookie, MigrateFolder
 from src.record import BaseLogger, LoggerManager
 from src.tools import (
     Browser,
     ColorfulConsole,
     DownloaderError,
+    RenameCompatible,
     choose,
     remove_empty_directories,
     safe_pop,
-    RenameCompatible,
 )
 from src.translation import _, switch_language
 
+from .main_monitor import ClipboardMonitor
 from .main_server import APIServer
 from .main_terminal import TikTok
 
@@ -49,10 +50,6 @@ class TikTokDownloader:
     VERSION_MAJOR = VERSION_MAJOR
     VERSION_MINOR = VERSION_MINOR
     VERSION_BETA = VERSION_BETA
-    PLATFORM = (
-        "cookie",
-        "cookie_tiktok",
-    )
     NAME = PROJECT_NAME
     WIDTH = 50
     LINE = ">" * WIDTH
@@ -61,11 +58,13 @@ class TikTokDownloader:
         self,
     ):
         self.rename_compatible()
-        self.console = ColorfulConsole()
+        self.console = ColorfulConsole(
+            debug=self.VERSION_BETA,
+        )
         self.logger = None
         self.recorder = None
         self.settings = Settings(PROJECT_ROOT, self.console)
-        self.event = Event()
+        self.event_cookie = Event()
         self.cookie = Cookie(self.settings, self.console)
         self.params_task = None
         self.parameter = None
@@ -110,13 +109,13 @@ class TikTokDownloader:
             0: _("启用"),
         }
         self.__function_menu = (
-            (_("复制粘贴写入 Cookie (抖音)"), self.write_cookie),
-            (_("从浏览器获取 Cookie (抖音)"), self.browser_cookie),
+            (_("从剪贴板读取 Cookie (抖音)"), self.write_cookie),
+            (_("从浏览器读取 Cookie (抖音)"), self.browser_cookie),
             # (_("扫码登录获取 Cookie (抖音)"), self.auto_cookie),
-            (_("复制粘贴写入 Cookie (TikTok)"), self.write_cookie_tiktok),
-            (_("从浏览器获取 Cookie (TikTok)"), self.browser_cookie_tiktok),
+            (_("从剪贴板读取 Cookie (TikTok)"), self.write_cookie_tiktok),
+            (_("从浏览器读取 Cookie (TikTok)"), self.browser_cookie_tiktok),
             (_("终端交互模式"), self.complete),
-            (_("后台监测模式"), self.disable_function),
+            (_("后台监听模式"), self.monitor),
             (_("Web API 模式"), self.server),
             (_("Web UI 模式"), self.disable_function),
             # (_("Web API 模式"), self.__api_object),
@@ -302,6 +301,19 @@ class TikTokDownloader:
         except KeyboardInterrupt:
             self.running = False
 
+    async def monitor(self):
+        await self.monitor_clipboard()
+
+    async def monitor_clipboard(self):
+        example = ClipboardMonitor(
+            self.parameter,
+            self.database,
+        )
+        try:
+            await example.run(self.run_command)
+        except (KeyboardInterrupt, CancelledError):
+            await example.stop_listener()
+
     async def change_config(
         self,
         key: str,
@@ -313,38 +325,44 @@ class TikTokDownloader:
         await self.check_settings()
 
     async def write_cookie(self):
-        await self.__write_cookie()
+        await self.__write_cookie(False)
 
     async def write_cookie_tiktok(self):
-        await self.__write_cookie(1)
+        await self.__write_cookie(True)
 
-    async def __write_cookie(self, index=0):
+    async def __write_cookie(self, tiktok: bool):
         self.console.print(
             _("Cookie 获取教程：")
             + "https://github.com/JoeanAmier/TikTokDownloader/blob/master/docs/Cookie%E8%8E%B7%E5%8F%96%E6"
             "%95%99%E7%A8%8B.md"
         )
-        if self.cookie.run(self.PLATFORM[index], index):
+        if self.console.input(
+            _(
+                "复制 Cookie 内容至剪贴板后，按回车键确认继续；若输入任意内容并按回车，则取消操作："
+            )
+        ):
+            return
+        if self.cookie.run(tiktok):
             await self.check_settings()
 
-    async def auto_cookie(self):
-        self.console.error(
-            _(
-                "该功能为实验性功能，仅适用于学习和研究目的；目前仅支持抖音平台，建议使用其他方式获取 Cookie，未来可能会禁用或移除该功能！"
-            ),
-        )
-        if self.console.input(_("是否返回上一级菜单(YES/NO)")).upper() != "NO":
-            return
-        if cookie := await Register(
-            self.parameter,
-            self.settings,
-        ).run():
-            self.cookie.extract(cookie)
-            await self.check_settings()
-        else:
-            self.console.warning(
-                _("扫码登录失败，未写入 Cookie！"),
-            )
+    # async def auto_cookie(self):
+    #     self.console.error(
+    #         _(
+    #             "该功能为实验性功能，仅适用于学习和研究目的；目前仅支持抖音平台，建议使用其他方式获取 Cookie，未来可能会禁用或移除该功能！"
+    #         ),
+    #     )
+    #     if self.console.input(_("是否返回上一级菜单(YES/NO)")).upper() != "NO":
+    #         return
+    #     if cookie := await Register(
+    #         self.parameter,
+    #         self.settings,
+    #     ).run():
+    #         self.cookie.extract(cookie, platform=_("抖音"))
+    #         await self.check_settings()
+    #     else:
+    #         self.console.warning(
+    #             _("扫码登录失败，未写入 Cookie！"),
+    #         )
 
     async def compatible(self, mode: str):
         if mode in {"Q", "q", ""}:
@@ -378,11 +396,12 @@ class TikTokDownloader:
             **self.settings.read(),
             recorder=self.recorder,
         )
+        MigrateFolder(self.parameter).compatible()
         self.parameter.set_headers_cookie()
-        # self.restart_cycle_task(
-        #     restart,
-        # )
-        await self.parameter.update_params_offline()
+        self.restart_cycle_task(
+            restart,
+        )
+        # await self.parameter.update_params_offline()
         if not restart:
             self.run_command = self.parameter.run_command.copy()
         self.parameter.CLEANER.set_rule(TEXT_REPLACEMENT, True)
@@ -398,9 +417,9 @@ class TikTokDownloader:
 
     def periodic_update_params(self):
         async def inner():
-            while not self.event.is_set():
+            while not self.event_cookie.is_set():
                 await self.parameter.update_params()
-                self.event.wait(COOKIE_UPDATE_INTERVAL)
+                self.event_cookie.wait(COOKIE_UPDATE_INTERVAL)
 
         run(
             inner(),
@@ -411,16 +430,16 @@ class TikTokDownloader:
         restart=True,
     ):
         if restart:
-            self.event.set()
+            self.event_cookie.set()
             while self.params_task.is_alive():
                 # print("等待子线程结束！")  # 调试代码
                 sleep(1)
         self.params_task = Thread(target=self.periodic_update_params)
-        self.event.clear()
+        self.event_cookie.clear()
         self.params_task.start()
 
     def close(self):
-        self.event.set()
+        self.event_cookie.set()
         if self.parameter.folder_mode:
             remove_empty_directories(self.parameter.ROOT)
             remove_empty_directories(self.parameter.root)

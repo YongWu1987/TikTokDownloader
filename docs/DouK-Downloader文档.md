@@ -16,10 +16,12 @@
 </div>
 <br>
 <p>🔥 <b>TikTok 发布/喜欢/合辑/直播/视频/图集/音乐；抖音发布/喜欢/收藏/收藏夹/视频/图集/实况/直播/音乐/合集/评论/账号/搜索/热榜数据采集工具：</b>完全开源，基于 HTTPX 模块实现的免费数据采集和文件下载工具；批量下载抖音账号发布、喜欢、收藏、收藏夹作品；批量下载 TikTok 账号发布、喜欢作品；下载抖音链接或 TikTok 链接作品；获取抖音直播推流地址；下载抖音直播视频；获取 TikTok 直播推流地址；下载 TikTok 直播视频；采集抖音作品评论数据；批量下载抖音合集作品；批量下载 TikTok 合辑作品；采集抖音账号详细数据；采集抖音用户 / 作品 / 直播搜索结果；采集抖音热榜数据。</p>
-<p>⭐ <b>文档对应项目版本：<code>5.7 Beta</code>；文档内容正在完善中，如有发现任何错误或描述模糊之处，请告知作者以便改进！本项目历史名称：<code>TikTokDownloader</code></b></p>
+<p>⭐ <b>项目版本：<code>5.7 Beta</code>；更新日期：<code>2025/8/5</code></b></p>
+<p>⭐ <b>项目文档正在完善，如果发现任何错误或描述模糊之处，请告知作者以便改进！本项目历史名称：<code>TikTokDownloader</code></b></p>
 <hr>
 <h1>快速入门</h1>
 <p>⭐ 本项目包含手动构建可执行文件的 GitHub Actions，使用者可以随时使用 GitHub Actions 将最新源码构建为可执行文件！</p>
+<p>⭐ 自动构建可执行文件教程请查阅本文档的 <code>构建可执行文件指南</code> 部分；如果需要更加详细的图文教程，请 <a href="https://mp.weixin.qq.com/s/TorfoZKkf4-x8IBNLImNuw">查阅文章</a>！</p>
 <ol>
 <li><b>运行可执行文件</b> 或者 <b>配置环境运行</b>
 <ol><b>运行可执行文件</b>
@@ -39,23 +41,23 @@
 </li>
 <li>阅读 DouK-Downloader 的免责声明，根据提示输入内容</li>
 <li>将 Cookie 信息写入配置文件
-<ol><b>手动复制粘贴 Cookie</b>
+<ol><b>从剪贴板读取 Cookie</b>
 <li>参考 <a href="https://github.com/JoeanAmier/TikTokDownloader/blob/master/docs/Cookie%E8%8E%B7%E5%8F%96%E6%95%99%E7%A8%8B.md">Cookie 提取教程</a>，复制所需 Cookie 至剪贴板</li>
-<li>选择 <code>复制粘贴写入 Cookie</code> 选项，按照提示将 Cookie 写入配置文件</li>
+<li>选择 <code>从剪贴板读取 Cookie</code> 选项，程序会自动读取剪贴板的 Cookie 并写入配置文件</li>
 </ol>
-<ol><b>从浏览器获取 Cookie</b>
-<li>选择 <code>从浏览器获取 Cookie</code> 选项，按照提示选择浏览器类型</li>
+<ol><b>从浏览器读取 Cookie</b>
+<li>选择 <code>从浏览器读取 Cookie</code> 选项，按照提示输入浏览器类型或序号</li>
 </ol>
 <ol><b><del>扫码登录获取 Cookie</del>（失效）</b>
 <li><del>选择 <code>扫码登录获取 Cookie</code> 选项，程序会显示登录二维码图片，并使用默认应用打开图片</del></li>
 <li><del>使用抖音 APP 扫描二维码并登录账号</del></li>
-<li><del>按照提示操作，将 Cookie 写入配置文件</del></li>
+<li><del>按照提示操作，程序会自动将 Cookie 写入配置文件</del></li>
 </ol>
 </li>
 <li>返回程序界面，依次选择 <code>终端交互模式</code> -> <code>批量下载链接作品(抖音)</code> -> <code>手动输入待采集的作品链接</code></li>
 <li>输入抖音作品链接即可下载作品文件</li>
 </ol>
-<p><b>TikTok 平台功能需要额外设置配置文件 <code>browser_info_tiktok</code> 的 <code>device_id</code> 参数，否则平台功能可能无法正常使用！参数获取方式与 Cookie 类似，详见 <a href="https://github.com/JoeanAmier/TikTokDownloader/blob/master/docs/Cookie%E8%8E%B7%E5%8F%96%E6%95%99%E7%A8%8B.md">Cookie 获取教程</a></b></p>
+<p><b>TikTok 平台功能需要额外设置配置文件 <code>browser_info_tiktok</code> 的 <code>device_id</code> 参数，否则 TikTok 平台功能可能无法正常使用！参数获取方式与 Cookie 类似，详见 <a href="https://github.com/JoeanAmier/TikTokDownloader/blob/master/docs/Cookie%E8%8E%B7%E5%8F%96%E6%95%99%E7%A8%8B.md">Cookie 获取教程</a></b></p>
 <h2>Docker 容器</h2>
 <ol>
 <li>获取镜像</li>
@@ -64,7 +66,9 @@
 <li>方式二：使用 <code>docker pull joeanamier/tiktok-downloader</code> 命令拉取镜像</li>
 <li>方式三：使用 <code>docker pull ghcr.io/joeanamier/tiktok-downloader</code> 命令拉取镜像</li>
 </ul>
-<li>创建容器：<code>docker run --name 容器名称(可选) -p 主机端口号:5555 -v tiktok_downloader_volume:/TikTokDownloader -it joeanamier/tiktok-downloader</code></li>
+<li>创建容器：<code>docker run --name 容器名称(可选) -p 主机端口号:5555 -v tiktok_downloader_volume:/app/Volume -it &lt;镜像名称&gt;</code>
+</li>
+<br><b>注意：</b>此处的 <code>&lt;镜像名称&gt;</code> 需与您在第一步中使用的镜像名称保持一致（例如 <code>joeanamier/tiktok-downloader</code> 或 <code>ghcr.io/joeanamier/tiktok-downloader</code>）
 <li>运行容器
 <ul>
 <li>启动容器：<code>docker start -i 容器名称/容器 ID</code></li>
@@ -72,7 +76,7 @@
 </ul>
 </li>
 </ol>
-<p>Docker 容器无法直接访问宿主机的文件系统，部分功能不可用，例如：<code>从浏览器获取 Cookie</code>；其他功能如有异常请反馈！</p>
+<p>Docker 容器无法直接访问宿主机的文件系统，部分功能不可用，例如：<code>从浏览器读取 Cookie</code>；其他功能如有异常请反馈！</p>
 <h1>Cookie 说明</h1>
 <p><a href="https://github.com/JoeanAmier/TikTokDownloader/blob/master/docs/Cookie%E8%8E%B7%E5%8F%96%E6%95%99%E7%A8%8B.md">点击查看 Cookie 获取教程</a>；无效或失效的 Cookie 会导致程序获取数据失败！</p>
 <ul>
@@ -94,7 +98,7 @@
 <li>项目支持使用 <code>CSV</code>、<code>XLSX</code>、<code>SQLite</code> 格式文件储存采集数据。</li>
 <li>配置文件 <code>settings.json</code> 的 <code>storage_format</code> 参数可设置数据储存格式类型，如果不设置该参数，程序不会储存任何数据至文件。</li>
 <li><code>采集作品评论数据</code>、<code>采集账号详细数据</code>、<code>采集搜索结果数据</code>、<code>采集抖音热榜数据</code> 模式必须设置 <code>storage_format</code> 参数才能正常使用。</li>
-<li>程序所有数据均储存至 <code>root</code> 参数路径下的 <code>Data</code> 文件夹。</li>
+<li>程序所有数据均储存至配置文件 <code>root</code> 参数路径下的 <code>Data</code> 文件夹。</li>
 </ul>
 <h2>文本文档</h2>
 <p>项目部分功能支持从文本文档（TXT）读取链接，如需使用，请在计算机任意路径创建一个空白文本文档，然后编辑文件内容，每行输入单个链接，编辑完成后保存文件。</p>
@@ -173,7 +177,7 @@ built with gcc 14.2.0 (crosstool-NG 1.27.0.18_7458341)
 <p>本项目支持抖音平台和 TikTok 平台的数据采集和文件下载功能，平台功能默认开启，如果不需要使用平台的任何功能，可以编辑配置文件关闭平台功能。</p>
 <p><del>本项目内置参数更新机制，程序会周期性更新抖音与 TikTok 请求的部分参数，以保持参数的有效性（或许没有效果？），该功能无法防止参数失效，参数失效后需要重新写入 Cookie；关闭平台功能后，对应平台的参数更新功能将会禁用！</del></p>
 <h1>配置文件</h1>
-<p>配置文件：项目根目录下的 <code>settings.json</code> 文件，可以自定义设置程序部分运行参数。</p>
+<p>配置文件：项目根目录下的 <code>./Volume/settings.json</code> 文件，可以自定义设置程序部分运行参数。</p>
 <p>若无特殊需求，大部分配置参数无需修改，直接使用默认值即可。</p>
 <p><b><code>cookie</code>、<code>cookie_tiktok</code> 与 <code>device_id</code>参数为必需参数，必须设置该参数才能正常使用程序</b>；其余参数可以根据实际需求进行修改！</p>
 <p>如果您的计算机没有合适的程序编辑 JSON 文件，建议使用 <a href="https://try8.cn/tool/format/json">JSON 在线工具</a> 编辑配置文件内容。</p>
@@ -264,7 +268,7 @@ built with gcc 14.2.0 (crosstool-NG 1.27.0.18_7458341)
 <td align="center">root</td>
 <td align="center">str</td>
 <td align="center">作品文件和数据记录保存路径；建议使用绝对路径</td>
-<td align="center">项目根路径</td>
+<td align="center">项目根路径/Volume</td>
 </tr>
 <tr>
 <td align="center">folder_name</td>
@@ -700,7 +704,7 @@ built with gcc 14.2.0 (crosstool-NG 1.27.0.18_7458341)
 <ul>其他示例：
 <li><code>6 2</code>：代表依次执行 <code>终端交互模式</code> -> <code>批量下载账号作品(抖音)</code></li>
 <li><code>8</code>：代表执行<code>Web API 模式</code></li>
-<li><code>2 7</code>：代表依次执行<code>从浏览器获取 Cookie (抖音)</code> -> <code>Edge</code></li>
+<li><code>2 7</code>：代表依次执行<code>从浏览器读取 Cookie (抖音)</code> -> <code>Edge</code></li>
 </ul>
 <h3>程序代理设置</h3>
 
@@ -733,11 +737,10 @@ built with gcc 14.2.0 (crosstool-NG 1.27.0.18_7458341)
 <li>设置服务器模式参数验证</li>
 </ul>
 <h1>功能介绍</h1>
-<h2>复制粘贴写入 Cookie</h2>
-<p>参考 <a href="https://github.com/JoeanAmier/TikTokDownloader/blob/master/docs/Cookie%E8%8E%B7%E5%8F%96%E6%95%99%E7%A8%8B.md">Cookie 提取教程</a>，手动从浏览器复制所需 Cookie 至剪贴板，按照程序提示输入 Cookie 后回车确认，程序会自动处理 Cookie 并写入配置文件。</p>
-<p>如果粘贴 Cookie 至终端后无响应，可能是 Cookie 文本长度超出终端最大文本长度限制，请考虑更换终端或者其他写入方式。</p>
+<h2>从剪贴板读取 Cookie</h2>
+<p>参考 <a href="https://github.com/JoeanAmier/TikTokDownloader/blob/master/docs/Cookie%E8%8E%B7%E5%8F%96%E6%95%99%E7%A8%8B.md">Cookie 提取教程</a>，手动从浏览器复制所需 Cookie 内容至剪贴板，再按照程序提示操作；程序会自动读取剪贴板的内容并将有效的 Cookie 写入配置文件。</p>
 <p>成功写入配置文件后，程序会提示当前 Cookie 登录状态！</p>
-<h2>从浏览器获取 Cookie</h2>
+<h2>从浏览器读取 Cookie</h2>
 <p>自动读取本地浏览器的 Cookie 数据，并提取所需 Cookie 写入配置文件。</p>
 <p>成功写入配置文件后，程序会提示当前 Cookie 登录状态！</p>
 <p>Windows 系统需要以管理员身份运行程序才能读取 Chromium、Chrome、Edge 浏览器 Cookie！</p>
@@ -1096,8 +1099,9 @@ built with gcc 14.2.0 (crosstool-NG 1.27.0.18_7458341)
 <li><code>https://www.tiktok.com/@TikTok号/video/作品ID</code></li>
 </ul>
 <p>作品会下载至 <code>root</code> 参数和 <code>folder_name</code> 参数拼接成的文件夹。</p>
-<h2>后台监测模式</h2>
-<p>敬请期待！</p>
+<h2>后台监听模式</h2>
+<h3>剪贴板监听下载</h3>
+<p>程序会自动检测并提取剪贴板中的抖音和 TikTok 作品链接，并自动下载作品文件；如需关闭，请按下 Ctrl+C，或将剪贴板内容设置为“close”以停止监听！</p>
 <h2>Web API 接口模式</h2>
 <p>启动服务器，提供 API 调用功能；支持局域网远程访问，可以部署至私有服务器或者公开服务器，远程部署建议设置参数验证，防止恶意请求！</p>
 <p>默认禁用局域网访问，如需开启，请修改 <code>src/custom/static.py</code> 文件的 <code>SERVER_HOST</code> 变量。</p>
@@ -1127,11 +1131,11 @@ demo()
 <li>启用该功能：程序会记录下载成功的作品 ID，如果对作品文件进行移动、重命名或者删除操作，程序不会重复下载该作品，如果想要重新下载该作品，需要删除记录数据中对应的作品 ID。</li>
 <li>禁用该功能：程序会在下载文件前检测文件是否存在，如果文件存在会自动跳过下载该作品，如果对作品文件进行移动、重命名或者删除操作，程序将会重新下载该作品。</li>
 </ul>
-<p>数据路径: <code>./DouK-Downloader.db</code> 的 <code>download_data</code> 数据表。</p>
+<p>数据路径: <code>./Volume/DouK-Downloader.db</code> 的 <code>download_data</code> 数据表。</p>
 <h2>删除指定下载记录</h2>
 <p>输入作品 ID 或者作品完整链接（多个作品之间使用空格分隔，支持混合输入），删除作品下载记录中对应的数据，如果输入 <code>all</code>，代表清空作品下载记录数据！</p>
 <h2>启用/禁用运行日志记录</h2>
-<p>是否将程序运行日志记录保存到文件，默认关闭，日志文件保存路径：<code>./Log</code></p>
+<p>是否将程序运行日志记录保存到文件，默认关闭，日志文件保存路径：<code>./Volume/Log</code></p>
 <p>如果在使用过程中发现程序 Bug，可以及时告知作者，并附上日志文件，日志记录有助于作者分析 Bug 原因和修复 Bug。</p>
 <h2>检查程序版本更新</h2>
 <p>程序会向 <code>https://github.com/JoeanAmier/TikTokDownloader/releases/latest</code>
@@ -1172,7 +1176,7 @@ demo()
 <p>在 <code>批量下载账号作品</code> 和 <code>批量下载合集作品</code> 模式下，程序会自动判断账号昵称/合集标题是否发生变化，如果发生变化，程序会自动识别已下载作品文件名称中的账号昵称/合集标题，并修改至最新账号昵称/合集标题。</p>
 <p>程序会优先使用账号标识/合集标识进行更新处理，如果账号标识/合集标识为空字符串，程序会自动使用账号昵称/合集标题进行更新处理。</p>
 <h3>映射缓存数据</h3>
-<p><strong>数据路径: <code>./DouK-Downloader.db</code> 的 <code>mapping_data</code> 数据表；</strong>
+<p><strong>数据路径: <code>./Volume/DouK-Downloader.db</code> 的 <code>mapping_data</code> 数据表；</strong>
 用于记录账号 / 合集标识和账号昵称，当账号 / 合集标识或账号昵称发生变化时，程序会对相应的文件夹和文件进行重命名更新处理。</p>
 <p><strong>缓存数据仅供程序读取和修改，不建议手动编辑数据内容。</strong></p>
 

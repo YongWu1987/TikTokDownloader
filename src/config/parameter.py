@@ -1,7 +1,8 @@
 from pathlib import Path
+from shutil import move
 from time import localtime, strftime
 from types import SimpleNamespace
-from typing import TYPE_CHECKING, Type, Any
+from typing import TYPE_CHECKING, Any, Type
 
 from httpx import HTTPStatusError, RequestError, TimeoutException, get
 
@@ -24,7 +25,7 @@ from ..interface import API, APITikTok
 from ..module import FFMPEG
 from ..record import BaseLogger, LoggerManager
 from ..storage import RecordManager
-from ..tools import Cleaner, cookie_dict_to_str, create_client
+from ..tools import Cleaner, DownloaderError, cookie_dict_to_str, create_client
 from ..translation import _
 
 if TYPE_CHECKING:
@@ -100,7 +101,7 @@ class Parameter:
         self.settings = settings
         self.cookie_object = cookie_object
         self.ROOT = PROJECT_ROOT  # 项目根路径
-        self.cache = PROJECT_ROOT.joinpath("cache")  # 缓存路径
+        self.cache = PROJECT_ROOT.joinpath("Cache")  # 缓存路径
         self.logger = logger(PROJECT_ROOT, console)
         self.logger.run()
         self.ab = ABogus()
@@ -139,7 +140,7 @@ class Parameter:
         self.cookie_state: bool = self.__check_cookie_state()
         self.cookie_tiktok_state: bool = self.__check_cookie_state(True)
         self.set_uif_id()
-        self.set_download_headers()
+        # self.set_download_headers()
 
         self.root = self.__check_root(root)
         self.folder_name = self.__check_folder_name(folder_name)
@@ -290,7 +291,7 @@ class Parameter:
     ) -> str:
         return self.__check_cookie_tiktok(cookie)[1]
 
-    async def __add_cookie(
+    def __add_cookie(
         self,
         parameters: tuple[dict, ...],
         cookie: dict | str,
@@ -303,6 +304,7 @@ class Parameter:
                         False,
                     )
                     cookie |= i
+            return None
         elif isinstance(cookie, str):
             for i in parameters:
                 if i:
@@ -312,6 +314,7 @@ class Parameter:
                     )
                     cookie += f"; {cookie_dict_to_str(i)}"
             return cookie
+        raise DownloaderError
 
     async def __get_tt_wid_params(self) -> dict:
         if tt_wid := await TtWid.get_tt_wid(
@@ -569,7 +572,10 @@ class Parameter:
                         ms_token,
                         tt_wid,
                     ),
-                    self.headers,
+                    (
+                        self.headers,
+                        self.headers_download,
+                    ),
                     self.cookie_dict,
                     self.cookie_str,
                 )
@@ -578,7 +584,7 @@ class Parameter:
                 )
             else:
                 self.logger.warning(
-                    _("抖音 cookie 参数未设置，相应功能可能无法正常使用")
+                    _("配置文件 cookie 参数未设置，抖音平台功能可能无法正常使用")
                 )
         if self.tiktok_platform:
             if any(
@@ -598,7 +604,10 @@ class Parameter:
                         ms_token,
                         tt_wid,
                     ),
-                    self.headers_tiktok,
+                    (
+                        self.headers_tiktok,
+                        self.headers_download_tiktok,
+                    ),
                     self.cookie_dict_tiktok,
                     self.cookie_str_tiktok,
                 )
@@ -607,7 +616,9 @@ class Parameter:
                 )
             else:
                 self.logger.warning(
-                    _("TikTok cookie 参数未设置，相应功能可能无法正常使用")
+                    _(
+                        "配置文件 cookie_tiktok 参数未设置，TikTok 平台功能可能无法正常使用"
+                    )
                 )
 
     async def update_params_offline(self) -> None:
@@ -625,13 +636,16 @@ class Parameter:
                 API.params["msToken"] = ms_token
                 await self.__update_cookie(
                     ({MsToken.NAME: ms_token},),
-                    self.headers,
+                    (
+                        self.headers,
+                        self.headers_download,
+                    ),
                     self.cookie_dict,
                     self.cookie_str,
                 )
             else:
                 self.logger.warning(
-                    _("抖音 cookie 参数未设置，相应功能可能无法正常使用")
+                    _("配置文件 cookie 参数未设置，抖音平台功能可能无法正常使用")
                 )
         if self.tiktok_platform:
             if any(
@@ -644,42 +658,53 @@ class Parameter:
                 APITikTok.params["msToken"] = ms_token.get(MsTokenTikTok.NAME, "")
                 await self.__update_cookie(
                     (ms_token,),
-                    self.headers_tiktok,
+                    (
+                        self.headers_tiktok,
+                        self.headers_download_tiktok,
+                    ),
                     self.cookie_dict_tiktok,
                     self.cookie_str_tiktok,
                 )
             else:
                 self.logger.warning(
-                    _("TikTok cookie 参数未设置，相应功能可能无法正常使用")
+                    _(
+                        "配置文件 cookie_tiktok 参数未设置，TikTok 平台功能可能无法正常使用"
+                    )
                 )
 
     async def __update_cookie(
         self,
         parameters: tuple[dict, ...],
-        headers: dict,
-        cookie: dict,
-        cache: str,
+        headers: tuple[dict, ...],
+        cookie_dict: dict,
+        cookie_str: str,
     ) -> None:
-        if cookie:
-            await self.__add_cookie(
-                parameters,
-                cookie,
-            )
-            headers["Cookie"] = cookie_dict_to_str(cookie)
-        elif cache:
-            headers["Cookie"] = await self.__add_cookie(parameters, cache)
+        cookie = self.__add_cookie(
+            parameters,
+            cookie_dict or cookie_str,
+        )
+        if not isinstance(cookie, str):
+            cookie = cookie_dict_to_str(cookie_dict)
+        for i in headers:
+            i["Cookie"] = cookie
 
     def set_headers_cookie(
         self,
     ) -> None:
         if self.cookie_dict:
-            self.headers["Cookie"] = cookie_dict_to_str(self.cookie_dict)
+            cookie = cookie_dict_to_str(self.cookie_dict)
+            self.headers["Cookie"] = cookie
+            self.headers_download["Cookie"] = cookie
         elif self.cookie_str:
             self.headers["Cookie"] = self.cookie_str
+            self.headers_download["Cookie"] = self.cookie_str
         if self.cookie_dict_tiktok:
-            self.headers_tiktok["Cookie"] = cookie_dict_to_str(self.cookie_dict_tiktok)
+            cookie = cookie_dict_to_str(self.cookie_dict_tiktok)
+            self.headers_tiktok["Cookie"] = cookie
+            self.headers_download_tiktok["Cookie"] = cookie
         elif self.cookie_str_tiktok:
             self.headers_tiktok["Cookie"] = self.cookie_str_tiktok
+            self.headers_download_tiktok["Cookie"] = self.cookie_str_tiktok
 
     def set_download_headers(self) -> None:
         self.__update_download_headers()
@@ -859,9 +884,11 @@ class Parameter:
         self.set_general_params(data)
 
     async def __update_cookie_data(self, data: dict) -> None:
-        for i in ("cookie", "cookie_tiktok"):
+        for i, j in zip(("cookie", "cookie_tiktok"), (_("抖音"), "TikTok")):
             if c := data.get(i):
-                setattr(self, i, self.cookie_object.extract(c, False, key=i))
+                setattr(
+                    self, i, self.cookie_object.extract(c, False, key=i, platform=j)
+                )
         await self.update_params()
 
     @staticmethod
@@ -976,6 +1003,7 @@ class Parameter:
         await self.client_tiktok.aclose()
 
     def __generate_folders(self):
+        self.compatible()
         self.cache.mkdir(exist_ok=True)
 
     def __set_browser_info(
@@ -1100,3 +1128,9 @@ class Parameter:
             return ""
 
         return f"{key}={value}" if return_key else value
+
+    def compatible(self):
+        if (
+            old := self.ROOT.parent.joinpath("Cache")
+        ).exists() and not self.cache.exists():
+            move(old, self.cache)

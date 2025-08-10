@@ -17,55 +17,61 @@
 </div>
 <br>
 <p>🔥 <b>TikTok 发布/喜欢/合辑/直播/视频/图集/音乐；抖音发布/喜欢/收藏/收藏夹/视频/图集/实况/直播/音乐/合集/评论/账号/搜索/热榜数据采集工具：</b>完全开源，基于 HTTPX 模块实现的免费数据采集和文件下载工具；批量下载抖音账号发布、喜欢、收藏、收藏夹作品；批量下载 TikTok 账号发布、喜欢作品；下载抖音链接或 TikTok 链接作品；获取抖音直播推流地址；下载抖音直播视频；获取 TikTok 直播推流地址；下载 TikTok 直播视频；采集抖音作品评论数据；批量下载抖音合集作品；批量下载 TikTok 合辑作品；采集抖音账号详细数据；采集抖音用户 / 作品 / 直播搜索结果；采集抖音热榜数据。</p>
-<p>⭐ 本项目完全免费开源，无任何收费功能，请勿上当受骗！本项目历史名称：<code>TikTokDownloader</code></p>
+<p>⭐ 本项目历史名称：<code>TikTokDownloader</code></p>
 <hr>
 
 # 📝 项目功能
 
-* ✅ 下载抖音无水印视频/图集
-* ✅ 下载抖音无水印实况/动图
-* ✅ 下载最高画质视频文件
-* ✅ 下载 TikTok 视频原画
-* ✅ 下载 TikTok 无水印视频/图集
-* ✅ 下载抖音账号发布/喜欢/收藏/收藏夹作品
-* ✅ 下载 TikTok 账号发布/喜欢作品
-* ✅ 采集抖音 / TikTok 详细数据
-* ✅ 批量下载链接作品
-* ✅ 多账号批量下载作品
-* ✅ 自动跳过已下载的文件
-* ✅ 持久化保存采集数据
-* ✅ 支持 CSV/XLSX/SQLite 格式保存数据
-* ✅ 下载动态/静态封面图
-* ✅ 获取抖音直播推流地址
-* ✅ 获取 TikTok 直播推流地址
-* ✅ 调用 ffmpeg 下载直播
-* ✅ Web UI 交互界面
-* ✅ 采集抖音作品评论数据
-* ✅ 下载抖音合集作品
-* ✅ 下载 TikTok 合辑作品
-* ✅ 记录点赞收藏等统计数据
-* ✅ 筛选作品发布时间
-* ✅ 支持账号作品增量下载
-* ✅ 支持使用代理采集数据
-* ✅ 支持局域网远程访问
-* ✅ 采集抖音账号详细数据
-* ✅ 作品统计数据更新
-* ✅ 支持自定义账号/合集标识
-* ✅ 自动更新账号昵称/标识
-* ✅ 部署至私有服务器
-* ✅ 部署至公开服务器
-* ✅ 采集抖音搜索数据
-* ✅ 采集抖音热榜数据
-* ✅ 记录已下载作品 ID
-* ☑️ ~~扫码登陆获取 Cookie~~
-* ✅ 从浏览器获取 Cookie
-* ✅ 支持 Web API 调用
-* ✅ 支持多线程下载作品
-* ✅ 文件完整性处理机制
-* ✅ 自定义规则筛选作品
-* ✅ 按文件夹归档保存作品文件
-* ✅ 自定义设置文件大小上限
-* ✅ 支持文件断点续传下载
+<details>
+<summary>功能列表（点击展开）</summary>
+<ul>
+<li>✅ 下载抖音无水印视频/图集</li>
+<li>✅ 下载抖音无水印实况/动图</li>
+<li>✅ 下载最高画质视频文件</li>
+<li>✅ 下载 TikTok 视频原画</li>
+<li>✅ 下载 TikTok 无水印视频/图集</li>
+<li>✅ 下载抖音账号发布/喜欢/收藏/收藏夹作品</li>
+<li>✅ 下载 TikTok 账号发布/喜欢作品</li>
+<li>✅ 采集抖音 / TikTok 详细数据</li>
+<li>✅ 批量下载链接作品</li>
+<li>✅ 多账号批量下载作品</li>
+<li>✅ 自动跳过已下载的文件</li>
+<li>✅ 持久化保存采集数据</li>
+<li>✅ 支持 CSV/XLSX/SQLite 格式保存数据</li>
+<li>✅ 下载动态/静态封面图</li>
+<li>✅ 获取抖音直播推流地址</li>
+<li>✅ 获取 TikTok 直播推流地址</li>
+<li>✅ 调用 ffmpeg 下载直播</li>
+<li>✅ Web UI 交互界面</li>
+<li>✅ 采集抖音作品评论数据</li>
+<li>✅ 下载抖音合集作品</li>
+<li>✅ 下载 TikTok 合辑作品</li>
+<li>✅ 记录点赞收藏等统计数据</li>
+<li>✅ 筛选作品发布时间</li>
+<li>✅ 支持账号作品增量下载</li>
+<li>✅ 支持使用代理采集数据</li>
+<li>✅ 支持局域网远程访问</li>
+<li>✅ 采集抖音账号详细数据</li>
+<li>✅ 作品统计数据更新</li>
+<li>✅ 支持自定义账号/合集标识</li>
+<li>✅ 自动更新账号昵称/标识</li>
+<li>✅ 部署至私有服务器</li>
+<li>✅ 部署至公开服务器</li>
+<li>✅ 采集抖音搜索数据</li>
+<li>✅ 采集抖音热榜数据</li>
+<li>✅ 记录已下载作品 ID</li>
+<li>☑️ <del>扫码登陆获取 Cookie</del></li>
+<li>✅ 从浏览器读取 Cookie</li>
+<li>✅ 支持 Web API 调用</li>
+<li>✅ 支持多线程下载作品</li>
+<li>✅ 文件完整性处理机制</li>
+<li>✅ 自定义规则筛选作品</li>
+<li>✅ 按文件夹归档保存作品文件</li>
+<li>✅ 自定义设置文件大小上限</li>
+<li>✅ 支持文件断点续传下载</li>
+<li>✅ 监听剪贴板链接下载作品</li>
+</ul>
+</details>
 
 # 💻 程序截图
 
@@ -112,19 +118,13 @@ def demo():
 demo()
 ```
 
-# 📈 项目状态
-
-* 🟢 经过测试，[Releases](https://github.com/JoeanAmier/TikTokDownloader/releases/latest) 发布的源码已经验证所有功能正常可用
-* 🟡 DouK-Downloader 开发计划及进度可前往 [Projects](https://github.com/users/JoeanAmier/projects/2) 查阅
-* 🔴 请注意，最新源码\(Beta 版本\)可能存在一些不稳定的 Bug
-* 🔴 如果在使用过程中发现程序 Bug，请及时告知作者修复
-
 # 📋 项目说明
 
 ## 快速入门
 
 <p>⭐ Mac OS、Windows 10 及以上用户可前往 <a href="https://github.com/JoeanAmier/TikTokDownloader/releases/latest">Releases</a> 或者 <a href="https://github.com/JoeanAmier/TikTokDownloader/actions">Actions</a> 下载已编译的程序，开箱即用！</p>
 <p>⭐ 本项目包含自动构建可执行文件的 GitHub Actions，使用者可以随时使用 GitHub Actions 将最新源码构建为可执行文件！</p>
+<p>⭐ 自动构建可执行文件教程请查阅本文档的 <code>构建可执行文件指南</code> 部分；如果需要更加详细的图文教程，请 <a href="https://mp.weixin.qq.com/s/TorfoZKkf4-x8IBNLImNuw">查阅文章</a>！</p>
 <p><strong>注意：Mac OS 平台可执行文件 <code>main</code> 可能需要从终端命令行启动；受设备限制，Mac OS 平台可执行文件尚未经过测试，无法保证可用性！</strong></p>
 <hr>
 <ol>
@@ -146,17 +146,17 @@ demo()
 </li>
 <li>阅读 DouK-Downloader 的免责声明，根据提示输入内容</li>
 <li>将 Cookie 信息写入配置文件
-<ol><b>手动复制粘贴 Cookie</b>
+<ol><b>从剪贴板读取 Cookie</b>
 <li>参考 <a href="https://github.com/JoeanAmier/TikTokDownloader/blob/master/docs/Cookie%E8%8E%B7%E5%8F%96%E6%95%99%E7%A8%8B.md">Cookie 提取教程</a>，复制所需 Cookie 至剪贴板</li>
-<li>选择 <code>复制粘贴写入 Cookie</code> 选项，按照提示将 Cookie 写入配置文件</li>
+<li>选择 <code>从剪贴板读取 Cookie</code> 选项，程序会自动读取剪贴板的 Cookie 并写入配置文件</li>
 </ol>
-<ol><b>从浏览器获取 Cookie</b>
-<li>选择 <code>从浏览器获取 Cookie</code> 选项，按照提示选择浏览器类型</li>
+<ol><b>从浏览器读取 Cookie</b>
+<li>选择 <code>从浏览器读取 Cookie</code> 选项，按照提示输入浏览器类型或序号</li>
 </ol>
 <ol><b><del>扫码登录获取 Cookie</del>（失效）</b>
 <li><del>选择 <code>扫码登录获取 Cookie</code> 选项，程序会显示登录二维码图片，并使用默认应用打开图片</del></li>
 <li><del>使用抖音 APP 扫描二维码并登录账号</del></li>
-<li><del>按照提示操作，将 Cookie 写入配置文件</del></li>
+<li><del>按照提示操作，程序会自动将 Cookie 写入配置文件</del></li>
 </ol>
 </li>
 <li>返回程序界面，依次选择 <code>终端交互模式</code> -> <code>批量下载链接作品(通用)</code> -> <code>手动输入待采集的作品链接</code></li>
@@ -174,7 +174,9 @@ demo()
 <li>方式二：使用 <code>docker pull joeanamier/tiktok-downloader</code> 命令拉取镜像</li>
 <li>方式三：使用 <code>docker pull ghcr.io/joeanamier/tiktok-downloader</code> 命令拉取镜像</li>
 </ul>
-<li>创建容器：<code>docker run --name 容器名称(可选) -p 主机端口号:5555 -v tiktok_downloader_volume:/TikTokDownloader -it joeanamier/tiktok-downloader</code></li>
+<li>创建容器：<code>docker run --name 容器名称(可选) -p 主机端口号:5555 -v tiktok_downloader_volume:/app/Volume -it &lt;镜像名称&gt;</code>
+</li>
+<br><b>注意：</b>此处的 <code>&lt;镜像名称&gt;</code> 需与您在第一步中使用的镜像名称保持一致（例如 <code>joeanamier/tiktok-downloader</code> 或 <code>ghcr.io/joeanamier/tiktok-downloader</code>）
 <li>运行容器
 <ul>
 <li>启动容器：<code>docker start -i 容器名称/容器 ID</code></li>
@@ -182,8 +184,7 @@ demo()
 </ul>
 </li>
 </ol>
-<p>Docker 容器无法直接访问宿主机的文件系统，部分功能不可用，例如：<code>从浏览器获取 Cookie</code>；其他功能如有异常请反馈！</p>
-
+<p>Docker 容器无法直接访问宿主机的文件系统，部分功能不可用，例如：<code>从浏览器读取 Cookie</code>；其他功能如有异常请反馈！</p>
 <hr>
 
 ## 关于 Cookie
@@ -215,15 +216,9 @@ demo()
 <li>本项目并未针对程序多开的情况进行优化，如需程序多开，请复制整个项目的文件夹，避免出现预期之外的问题</li>
 <li>程序运行过程中，如需终止程序或 <code>ffmpeg</code>，请按下 <code>Ctrl + C</code> 终止运行，不要直接点击终端窗口的关闭按钮</li>
 </ul>
-<hr>
-
-## 程序更新
-
-> **方案一：** 下载并解压文件，将旧版本的 `DouK-Downloader.db` 文件和 `settings.json` 文件复制到 `_internal` 文件夹。
-
-> **方案二：** 下载并解压文件（不要运行程序），复制全部文件，直接覆盖旧版本文件。
-
-## 构建可执行文件指南
+<h2>构建可执行文件指南</h2>
+<details>
+<summary><b>构建可执行文件指南（点击展开）</b></summary>
 
 本指南将引导您通过 Fork 本仓库并执行 GitHub Actions 自动完成基于最新源码的程序构建和打包！
 
@@ -305,6 +300,13 @@ A:
 
 A: 由于权限限制，您无法直接触发主仓库的 Actions。请通过 Fork 仓库的方式执行打包流程
 
+</details>
+
+## 程序更新
+
+<p><strong>方案一：</strong>下载并解压文件，将旧版本的 <code>_internal\Volume</code> 文件夹复制到新版本的 <code>_internal</code> 文件夹。</p>
+<p><strong>方案二：</strong>下载并解压文件（不要运行程序），复制全部文件，直接覆盖旧版本文件。</p>
+
 # ⚠️ 免责声明
 
 <ol>
@@ -346,25 +348,6 @@ A: 由于权限限制，您无法直接触发主仓库的 Actions。请通过 Fo
 <li><a href="https://opensource.guide/zh-hans/how-to-contribute/">如何为开源做贡献</a></li>
 </ul>
 
-# ✉️ 联系作者
-
-<ul>
-<li>作者邮箱：yonglelolu@foxmail.com</li>
-<li>作者微信: Downloader_Tools</li>
-<li>微信公众号: Downloader Tools</li>
-<li><b>Discord 社区</b>: <a href="https://discord.com/invite/ZYtmgKud9Y">点击加入社区</a></li>
-<li>QQ 群聊(项目交流): <a href="https://github.com/JoeanAmier/TikTokDownloader/blob/master/docs/QQ%E7%BE%A4%E8%81%8A%E4%BA%8C%E7%BB%B4%E7%A0%81.png">扫码加入群聊</a></li>
-</ul>
-<p>✨ <b>作者的其他开源项目：</b></p>
-<ul>
-<li><b>XHS-Downloader（小红书、XiaoHongShu、RedNote）</b>：<a href="https://github.com/JoeanAmier/XHS-Downloader">https://github.com/JoeanAmier/XHS-Downloader</a></li>
-<li><b>KS-Downloader（快手、KuaiShou）</b>：<a href="https://github.com/JoeanAmier/KS-Downloader">https://github.com/JoeanAmier/KS-Downloader</a></li>
-</ul>
-<h1>⭐ Star 趋势</h1>
-<p>
-<img alt="Star History Chart" src="https://api.star-history.com/svg?repos=JoeanAmier/TikTokDownloader&amp;type=Timeline"/>
-</p>
-
 # ♥️ 支持项目
 
 <p>如果 <b>DouK-Downloader</b> 对您有帮助，请考虑为它点个 <b>Star</b> ⭐，感谢您的支持！</p>
@@ -385,19 +368,42 @@ A: 由于权限限制，您无法直接触发主仓库的 Actions。请通过 Fo
 
 # 💰 项目赞助
 
-## JetBrains 工具
+## DartNode
 
-[![PyCharm logo](https://resources.jetbrains.com/storage/products/company/brand/logos/PyCharm.svg)](https://www.jetbrains.com/)
+[![Powered by DartNode](https://dartnode.com/branding/DN-Open-Source-sm.png)](https://dartnode.com "Powered by DartNode - Free VPS for Open Source")
 
-[JetBrains](https://www.jetbrains.com/) 支持全球开源社区认可的活跃项目，并为非商业开发提供免费许可证。
+***
+
+## ZMTO
+
+<a href="https://www.zmto.com/"><img src="https://console.zmto.com/templates/2019/dist/images/logo_dark.svg" alt="ZMTO"></a>
+<p><a href="https://www.zmto.com/">ZMTO</a>：一家专业的云基础设施提供商，以可靠的尖端技术与专业支持，提供高效的解决方案，并为符合条件的开源项目提供企业级VPS基础设施，支持开源生态系统的可持续发展与创新。</p>
 
 ***
 
 ## TikHub
 
-<p><a href="https://tikhub.io/">TikHub</a> 是一家领先的数据接口服务供应商，专注于提供高质量的数据接口，涵盖了多个热门平台，包括 抖音、TikTok、小红书、Instagram、Twitter 和 快手 等平台。</p>
-<p>TikHub 还提供定制化的服务，如直播间监控、作品监控和达人监控，以满足不同业务场景的需求。</p>
-<p>通过每日签到，用户可以免费获取一定额度的使用量；可以使用我的 <strong>推荐链接</strong>：<a href="https://user.tikhub.io/users/signup?referral_code=ZrdH8McC">https://user.tikhub.io/users/signup?referral_code=ZrdH8McC</a> 或 <strong>推荐码</strong>：<code>ZrdH8McC</code>，注册并充值即可获得 <code>$2</code> 额度！</p>
+<p><a href="https://tikhub.io/">TikHub</a>：第三方 API 服务供应商，专注于提供各平台 API。</p>
+<p>通过每日签到，用户可以免费获取少量使用额度；可以使用我的 <strong>推荐链接</strong>：<a href="https://user.tikhub.io/users/signup?referral_code=ZrdH8McC">https://user.tikhub.io/users/signup?referral_code=ZrdH8McC</a> 或 <strong>推荐码</strong>：<code>ZrdH8McC</code>，注册并充值即可获得 <code>$2</code> 额度！</p>
+
+# ✉️ 联系作者
+
+<ul>
+<li>作者邮箱：yonglelolu@foxmail.com</li>
+<li>作者微信: Downloader_Tools</li>
+<li>微信公众号: Downloader Tools</li>
+<li><b>Discord 社区</b>: <a href="https://discord.com/invite/ZYtmgKud9Y">点击加入社区</a></li>
+<li>QQ 群聊(项目交流): <a href="https://github.com/JoeanAmier/TikTokDownloader/blob/master/docs/QQ%E7%BE%A4%E8%81%8A%E4%BA%8C%E7%BB%B4%E7%A0%81.png">扫码加入群聊</a></li>
+</ul>
+<p>✨ <b>作者的其他开源项目：</b></p>
+<ul>
+<li><b>XHS-Downloader（小红书、XiaoHongShu、RedNote）</b>：<a href="https://github.com/JoeanAmier/XHS-Downloader">https://github.com/JoeanAmier/XHS-Downloader</a></li>
+<li><b>KS-Downloader（快手、KuaiShou）</b>：<a href="https://github.com/JoeanAmier/KS-Downloader">https://github.com/JoeanAmier/KS-Downloader</a></li>
+</ul>
+<h1>⭐ Star 趋势</h1>
+<p>
+<img alt="Star History Chart" src="https://api.star-history.com/svg?repos=JoeanAmier/TikTokDownloader&amp;type=Timeline"/>
+</p>
 
 # 💡 项目参考
 
