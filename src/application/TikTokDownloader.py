@@ -185,7 +185,7 @@ class TikTokDownloader:
     async def disclaimer(self):
         if not self.config["Disclaimer"]:
             await self.__init_language()
-            self.console.print(_(DISCLAIMER_TEXT), style=MASTER)
+            # self.console.print(_(DISCLAIMER_TEXT), style=MASTER)
             # if self.console.input(
             #     _("是否已仔细阅读上述免责声明(YES/NO): ")
             # ).upper() not in ("Y", "YES"):
@@ -276,7 +276,7 @@ class TikTokDownloader:
         while self.running:
             self.__update_menu()
             if not mode:
-                mode = 7  # 默认选择Web API交互模式
+                mode = 5  # 默认选择终端交互模式
                 # mode = choose(
                 #     _("DouK-Downloader 功能选项"),
                 #     [i for i, __ in self.__function_menu],
